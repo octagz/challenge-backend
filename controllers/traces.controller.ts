@@ -49,6 +49,6 @@ export async function tracesController(req: Request, res: Response){
         });
   
     } catch (error) {
-        res.status(500).json({ error: "Failed to retrieve data.", message: error.message });
+        res.status(500).json({ error: "Failed to retrieve data."});
     }
   };
