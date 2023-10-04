@@ -1,12 +1,30 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
+import axios from 'axios';
+import { body, validationResult } from 'express-validator'
+import { tracesController, validationsTraces } from './controllers/traces.controller';
 
+require('dotenv').config();
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+app.use(express.json());
+
+app.post('/traces', validationsTraces, tracesController);
+
+app.get('/statistics', (req: Request, res: Response) => {
+  // Fetch data from your storage. For this example, we are returning dummy data.
+  res.json({
+      'longest_distance': {
+          'country': 'United States',
+          'value': 0
+      },
+      'most_traced': {
+          'country': 'United States',
+          'value': 1
+      }
+  });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
