@@ -1,6 +1,4 @@
 import express, { Request, Response } from 'express';
-import axios from 'axios';
-import { body, validationResult } from 'express-validator'
 import { tracesController, validationsTraces } from './controllers/traces.controller';
 import { statsController } from './controllers/statistics.controller';
 
