@@ -1,8 +1,8 @@
-import express, { Request, Response } from "express";
-import axios from "axios";
+import { Request, Response } from "express";
 import { body, validationResult } from "express-validator"
 import { convertedCurrency, convertCurrency } from "../services/convertion.service"
 import { IPGeoResponse, LatLng, computeDistance, fetchIPGeoInfo } from "../services/geolocation.service"
+import { storeTrace } from "../services/store-trace.service";
 
 
 const USA_CUR = "USD"
@@ -36,9 +36,15 @@ export async function tracesController(req: Request, res: Response){
         }
         
         const distance: number = computeDistance(originCoods, usaCoords);
-  
+
+        const result = await storeTrace(geoData.country, distance)
+        
+        if(!result.success) {
+            res.status(500).json({ error: "Failed to write to DB"})
+        }
+
         // Form and send the response.
-        res.json({
+        res.status(200).json({
             ip: geoData.query,
             name: geoData.country,
             code: geoData.countryCode,

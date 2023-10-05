@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node index.ts",
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "prisma": "prisma migrate dev"
   },
   "repository": {
     "type": "git",
@@ -27,9 +28,11 @@
     "express-validator": "^7.0.1"
   },
   "devDependencies": {
+    "@prisma/client": "^5.4.1",
     "@types/axios": "^0.14.0",
     "@types/express": "^4.17.18",
     "@types/node": "^20.8.2",
+    "prisma": "^5.4.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
