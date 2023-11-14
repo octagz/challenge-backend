@@ -29,7 +29,7 @@ export async function convertCurrency(from: string, to: string): Promise<convert
                 symbols: `${from},${to}`,
             }
         });
-        const conversionRate = response.data.rates[from] / response.data.rates[to]
+        const conversionRate = response.data.rates[to] / response.data.rates[from]
 
         const currencies: convertedCurrency[] = [
           {
